@@ -7,18 +7,23 @@ class LinkedList {
     }
 
     append(data) {
+        let node=new Node(data)
         if(this.length===0){
-            this._tail=new Node();
-            this._head=new Node();
+            this._tail=node;
+            this._head=node;
+        }else{
+            this._tail.next=node;
+            node.prev=this._tail;
+            this._tail=node;
         }
-        this.arr.push(data);
+        this.arr.push(node);
         this.length=this.arr.length;
         return this;
     }
 
     head() {
         if(this.arr.length){
-            return this.arr[0];
+            return this.arr[0].data;
         }else{
             return null;
         }
@@ -26,18 +31,19 @@ class LinkedList {
 
     tail() {
         if(this.arr.length){
-            return this.arr[this.arr.length-1];
+            return this.arr[this.arr.length-1].data;
         }else{
             return null;
         }
     }
 
     at(index) {
-        return this.arr[index];
+        return this.arr[index].data;
     }
 
     insertAt(index, data) {
-        this.arr.splice(index,0,data);
+        let node=new Node(data, this.arr[this.arr.length-2], this.arr[this.arr.length]);
+        this.arr.splice(index,0,node);
         return this;
     }
 
@@ -62,7 +68,13 @@ class LinkedList {
     }
 
     indexOf(data) {
-        return this.arr.indexOf(data);
+        let index=-1;
+        this.arr.forEach((name,i)=>{
+            if(name.data===data){
+                index=i;
+            }
+        })
+        return index;
     }
 }
 

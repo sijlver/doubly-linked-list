@@ -64,6 +64,18 @@ class LinkedList {
 
     reverse() {
         this.arr=this.arr.reverse();
+        for(let i=0;i<this.arr.length;i++){
+            if(i!==this.arr.length-1){
+                this.arr[i].next=this.arr[i+1];
+            }else{
+                this.arr[i].next=null;
+            }
+            if(i!==0){
+                this.arr[i].prev=this.arr[i-1];
+            }else{
+                this.arr[i].prev=null;
+            }
+        }
         return this;
     }
 
